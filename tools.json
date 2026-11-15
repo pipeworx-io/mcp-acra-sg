@@ -1,0 +1,43 @@
+[
+  {
+    "name": "acra_company_search",
+    "description": "Search Singapore registered entities (ACRA, Unique Entity Number register) by name or by UEN. Name search matches entities whose name contains every word given. Returns {found, matches_total, companies:[{uen, legal_name, status, legal_form, registration_date, registered_address}], data_as_of, source}. An empty search returns found:false with empty_reason. e.g. {name:\"Singapore Airlines\"} or {uen:\"197200078R\"}. Open data: no officers or directors.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Entity name or words in it, e.g. \"DBS Bank\"."
+        },
+        "uen": {
+          "type": "string",
+          "description": "Exact UEN, e.g. \"197200078R\" (Singapore Airlines Limited)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Keep only this status as the register states it, e.g. \"Registered\" or \"Deregistered\"."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max results, 1-25 (default 10)."
+        }
+      }
+    }
+  },
+  {
+    "name": "acra_company_get",
+    "description": "One Singapore registered entity by UEN. e.g. {uen:\"197200078R\"}. Returns {found, company:{uen, legal_name, status, legal_form, registration_date, registered_address}, data_as_of, source}; found:false with reason when the UEN is not on the register. Open data: no officers, directors or shareholders.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "uen": {
+          "type": "string",
+          "description": "Singapore Unique Entity Number, e.g. \"197200078R\"."
+        }
+      },
+      "required": [
+        "uen"
+      ]
+    }
+  }
+]
